@@ -9,8 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import { getArticles } from "../utils/api";
+import { Link } from "react-router-dom";
 
-const ArticlesList = ({topic}) => {
+const ArticlesList = ({ topic }) => {
   const [articlesList, setArticlesList] = React.useState([]);
 
   useEffect(() => {
@@ -25,7 +26,15 @@ const ArticlesList = ({topic}) => {
         {articlesList.map((article) => (
           <Grid item key={article.article_id} xs={12} sm={6} md={4}>
             <Card>
-              <CardActionArea>
+              <CardActionArea
+                component={Link}
+                to={{
+                  pathname: `/articles/${article.article_id}`,
+                  state: {
+                    number: 500
+                  },
+                }}
+              >
                 <CardContent>
                   <Typography gutterBottom variant="h5">
                     {article.title}
