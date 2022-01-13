@@ -37,7 +37,7 @@ const Comments = ({ article_id }) => {
                   />
                 </ListItemAvatar>
 
-                <ListItemText>{comment.body}</ListItemText>
+                <ListItemText primary={comment.author} secondary={comment.body}></ListItemText>
               </ListItem>
               <Divider />
             </>

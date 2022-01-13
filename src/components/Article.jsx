@@ -18,7 +18,7 @@ const Article = ({ article_id }) => {
       maxWidth="md"
       sx={{
         mt: 3,
-        mb: 5,
+        mb: 3,
       }}
     >
       <Typography
@@ -33,7 +33,7 @@ const Article = ({ article_id }) => {
         {article.title}
       </Typography>
       <Typography variant="body2" align="right">
-        {date.format("dddd, MMMM D YYYY")}
+        {date.format("dddd, D MMM YYYY")}
       </Typography>
       <Typography
         variant="subtitle2"

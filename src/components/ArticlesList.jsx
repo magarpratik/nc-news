@@ -19,6 +19,7 @@ import {
 import { getArticles } from "../utils/api";
 import { Link } from "react-router-dom";
 import Vote from "./Vote";
+import dayjs from "dayjs";
 
 const PAGE_LIMIT = 9;
 
@@ -58,7 +59,7 @@ const ArticlesList = ({ topic }) => {
       }}
     >
       <Box sx={{ mb: 2, display: "flex", flexDirection: "row-reverse" }}>
-        <FormControl sx={{mr: 2, ml: 2}}>
+        <FormControl sx={{ mr: 2, ml: 2 }}>
           <InputLabel>Sort by</InputLabel>
           <Select label="sort by" value={sort_by} onChange={handleSort}>
             <MenuItem value={"created_at"}>Date</MenuItem>
@@ -106,7 +107,20 @@ const ArticlesList = ({ topic }) => {
                       }}
                     />
                     <CardContent>
-                      <Typography variant="h5">{article.title}</Typography>
+                      <Typography variant="h5" gutterBottom>
+                        {article.title}
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography color="textSecondary">
+                          {new dayjs(article.created_at).format("D MMM YYYY")}
+                        </Typography>
+                        <Typography color="textSecondary">{`- ${article.author}`}</Typography>
+                      </Box>
                     </CardContent>
                   </CardActionArea>
                   <Vote article={article} />
