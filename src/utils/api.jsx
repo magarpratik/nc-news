@@ -10,12 +10,19 @@ export const getTopics = () => {
   });
 };
 
-export const getArticles = (topic, page) => {
+export const getArticles = ({
+  topic = "",
+  page = 1,
+  sort_by = "created_at",
+  order = "desc",
+}) => {
   return newsApi
     .get("/articles", {
       params: {
         topic,
         p: page,
+        sort_by: sort_by,
+        order: order,
       },
     })
     .then((res) => {
@@ -37,6 +44,6 @@ export const getComments = (article_id) => {
 
 export const addVote = (article_id) => {
   return newsApi.patch(`/articles/${article_id}`, {
-      inc_votes: 1,
+    inc_votes: 1,
   });
 };

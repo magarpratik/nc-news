@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import {
-  Button,
+  Box,
   Card,
   CardActionArea,
   CardContent,
   Container,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   Pagination,
+  Select,
   Stack,
   Typography,
 } from "@mui/material";
 import { getArticles } from "../utils/api";
 import { Link } from "react-router-dom";
-import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
+import Vote from "./Vote";
 
 const PAGE_LIMIT = 9;
 
@@ -21,20 +25,50 @@ const ArticlesList = ({ topic }) => {
   const [articlesList, setArticlesList] = useState([]);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const [sort_by, setSort_by] = useState("created_at");
+  const [order, setOrder] = useState("desc");
 
   useEffect(() => {
-    getArticles(topic, page).then(({ articles, total_count }) => {
+    getArticles({ topic, page, sort_by, order }).then(({ articles, total_count }) => {
       setArticlesList(articles);
       setTotalCount(total_count);
     });
-  }, [topic, page]);
+  }, [topic, page, sort_by, order]);
 
-  const handleChange = (event, value) => {
+  const handlePage = (event, value) => {
     setPage(value);
+  };
+
+  const handleSort = (event) => {
+    setSort_by(event.target.value);
+  };
+
+  const handleOrder = (event) => {
+    setOrder(event.target.value);
   };
 
   return (
     <Container maxWidth="md">
+      <Box sx={{ my: 2 }}>
+        <FormControl>
+          <InputLabel>Sort by</InputLabel>
+          <Select label="sort by" value={sort_by} onChange={handleSort}>
+            <MenuItem value={"created_at"}>Date</MenuItem>
+            <MenuItem value={"author"}>Author</MenuItem>
+            <MenuItem value={"title"}>Title</MenuItem>
+            <MenuItem value={"votes"}>Votes</MenuItem>
+            <MenuItem value={"comment_count"}>Comments</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel>Order</InputLabel>
+          <Select label="order" value={order} onChange={handleOrder}>
+            <MenuItem value={"asc"}>Ascending</MenuItem>
+            <MenuItem value={"desc"}>Descending</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
       <Stack
         direction="column"
         justifyContent="center"
@@ -62,11 +96,7 @@ const ArticlesList = ({ topic }) => {
                       </Typography>
                     </CardContent>
                   </CardActionArea>
-                  <Button
-                    startIcon={<ThumbUpRoundedIcon />}
-                  >
-                    {article.votes}
-                  </Button>
+                  <Vote article={article} />
                 </Stack>
               </Card>
             </Grid>
@@ -75,7 +105,7 @@ const ArticlesList = ({ topic }) => {
         <Pagination
           count={Math.ceil(totalCount / PAGE_LIMIT)}
           page={page}
-          onChange={handleChange}
+          onChange={handlePage}
         />
       </Stack>
     </Container>
