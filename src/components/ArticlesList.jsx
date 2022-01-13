@@ -5,6 +5,7 @@ import {
   Card,
   CardActionArea,
   CardContent,
+  CardMedia,
   Container,
   FormControl,
   Grid,
@@ -29,10 +30,12 @@ const ArticlesList = ({ topic }) => {
   const [order, setOrder] = useState("desc");
 
   useEffect(() => {
-    getArticles({ topic, page, sort_by, order }).then(({ articles, total_count }) => {
-      setArticlesList(articles);
-      setTotalCount(total_count);
-    });
+    getArticles({ topic, page, sort_by, order }).then(
+      ({ articles, total_count }) => {
+        setArticlesList(articles);
+        setTotalCount(total_count);
+      }
+    );
   }, [topic, page, sort_by, order]);
 
   const handlePage = (event, value) => {
@@ -48,9 +51,14 @@ const ArticlesList = ({ topic }) => {
   };
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ my: 2 }}>
-        <FormControl>
+    <Container
+      maxWidth="md"
+      sx={{
+        padding: "20px 0",
+      }}
+    >
+      <Box sx={{ mb: 2, display: "flex", flexDirection: "row-reverse" }}>
+        <FormControl sx={{mr: 2, ml: 2}}>
           <InputLabel>Sort by</InputLabel>
           <Select label="sort by" value={sort_by} onChange={handleSort}>
             <MenuItem value={"created_at"}>Date</MenuItem>
@@ -63,8 +71,8 @@ const ArticlesList = ({ topic }) => {
         <FormControl>
           <InputLabel>Order</InputLabel>
           <Select label="order" value={order} onChange={handleOrder}>
-            <MenuItem value={"asc"}>Ascending</MenuItem>
             <MenuItem value={"desc"}>Descending</MenuItem>
+            <MenuItem value={"asc"}>Ascending</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -90,10 +98,15 @@ const ArticlesList = ({ topic }) => {
                       pathname: `/articles/${article.article_id}`,
                     }}
                   >
+                    <CardMedia
+                      image={`https://source.unsplash.com/random?${article.title}`}
+                      title={article.title}
+                      sx={{
+                        paddingTop: "56.25%",
+                      }}
+                    />
                     <CardContent>
-                      <Typography gutterBottom variant="h5">
-                        {article.title}
-                      </Typography>
+                      <Typography variant="h5">{article.title}</Typography>
                     </CardContent>
                   </CardActionArea>
                   <Vote article={article} />
