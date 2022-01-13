@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import {
   Card,
@@ -6,45 +6,65 @@ import {
   CardContent,
   Container,
   Grid,
+  Pagination,
+  Stack,
   Typography,
 } from "@mui/material";
 import { getArticles } from "../utils/api";
 import { Link } from "react-router-dom";
 
+const PAGE_LIMIT = 9;
+
 const ArticlesList = ({ topic }) => {
-  const [articlesList, setArticlesList] = React.useState([]);
+  const [articlesList, setArticlesList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    getArticles(topic).then((articles) => {
+    getArticles(topic, page).then(({ articles, total_count }) => {
       setArticlesList(articles);
+      setTotalCount(total_count);
     });
-  }, [topic]);
+  }, [topic, page]);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   return (
     <Container maxWidth="md">
-      <Grid container spacing={4}>
-        {articlesList.map((article) => (
-          <Grid item key={article.article_id} xs={12} sm={6} md={4}>
-            <Card>
-              <CardActionArea
-                component={Link}
-                to={{
-                  pathname: `/articles/${article.article_id}`,
-                  state: {
-                    number: 500
-                  },
-                }}
-              >
-                <CardContent>
-                  <Typography gutterBottom variant="h5">
-                    {article.title}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid container spacing={4}>
+          {articlesList.map((article) => (
+            <Grid item key={article.article_id} xs={12} sm={6} md={4}>
+              <Card>
+                <CardActionArea
+                  component={Link}
+                  to={{
+                    pathname: `/articles/${article.article_id}`,
+                  }}
+                >
+                  <CardContent>
+                    <Typography gutterBottom variant="h5">
+                      {article.title}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+        <Pagination
+          count={Math.ceil(totalCount / PAGE_LIMIT)}
+          page={page}
+          onChange={handleChange}
+        />
+      </Stack>
     </Container>
   );
 };

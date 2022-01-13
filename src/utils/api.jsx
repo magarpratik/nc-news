@@ -10,14 +10,21 @@ export const getTopics = () => {
   });
 };
 
-export const getArticles = (topic) => {
-  return newsApi.get(`/articles?topic=${topic}`).then((res) => {
-    return res.data.articles;
-  })
+export const getArticles = (topic, page) => {
+  return newsApi
+    .get("/articles", {
+      params: {
+        topic,
+        p: page,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
 };
 
 export const getArticleById = (article_id) => {
   return newsApi.get(`/articles/${article_id}`).then((res) => {
     return res.data.article;
-  })
-}
+  });
+};
