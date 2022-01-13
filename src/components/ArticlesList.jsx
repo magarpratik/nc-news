@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import {
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -12,6 +13,7 @@ import {
 } from "@mui/material";
 import { getArticles } from "../utils/api";
 import { Link } from "react-router-dom";
+import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
 
 const PAGE_LIMIT = 9;
 
@@ -43,18 +45,29 @@ const ArticlesList = ({ topic }) => {
           {articlesList.map((article) => (
             <Grid item key={article.article_id} xs={12} sm={6} md={4}>
               <Card>
-                <CardActionArea
-                  component={Link}
-                  to={{
-                    pathname: `/articles/${article.article_id}`,
-                  }}
+                <Stack
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
                 >
-                  <CardContent>
-                    <Typography gutterBottom variant="h5">
-                      {article.title}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                  <CardActionArea
+                    component={Link}
+                    to={{
+                      pathname: `/articles/${article.article_id}`,
+                    }}
+                  >
+                    <CardContent>
+                      <Typography gutterBottom variant="h5">
+                        {article.title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <Button
+                    startIcon={<ThumbUpRoundedIcon />}
+                  >
+                    {article.votes}
+                  </Button>
+                </Stack>
               </Card>
             </Grid>
           ))}

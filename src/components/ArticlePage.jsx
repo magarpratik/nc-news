@@ -1,4 +1,3 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
 import Article from "./Article";
 import Comments from "./Comments";
@@ -11,8 +10,8 @@ const ArticlePage = () => {
 
   return (
     <>
-          <Article article_id={article_id}/>
-      <Comments />
+      <Article article_id={article_id} />
+      <Comments article_id={article_id} />
       <NewComment />
     </>
   );
