@@ -11,14 +11,14 @@ import {
   Typography,
 } from "@mui/material";
 
-const Comments = ({ article_id }) => {
+const Comments = ({ article_id, renderKey }) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
     getComments(article_id).then((comments) => {
       setComments(comments);
     });
-  }, [article_id]);
+  }, [article_id, renderKey]);
 
   return (
     <Container maxWidth="md" sx={{ padding: "20px 0" }}>

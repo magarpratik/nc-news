@@ -47,3 +47,10 @@ export const addVote = (article_id) => {
     inc_votes: 1,
   });
 };
+
+export const addComment = (article_id, username, body) => {
+  return newsApi.post(`/articles/${article_id}/comments`, {
+    username: username,
+    body: body,
+  });
+};

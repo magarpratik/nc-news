@@ -1,7 +1,29 @@
 import { Button, Container, FormControl, TextField } from "@mui/material";
+import { useContext, useState } from "react";
+import { UserContext } from "../contexts/User";
+import { addComment } from "../utils/api";
 
-const NewComment = () => {
+const NewComment = ({ article_id, renderKey, setRenderKey }) => {
+  const { user } = useContext(UserContext);
+  const [comment, setComment] = useState("");
+
+  const handleComment = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    addComment(article_id, user, comment)
+      .then((res) => {
+        setComment("");
+        setRenderKey(!renderKey);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
+    // <form onSubmit={handleSubmit}>
     <Container
       maxWidth="md"
       sx={{
@@ -11,20 +33,29 @@ const NewComment = () => {
     >
       <FormControl fullWidth>
         <TextField
-          label="Comment"
+          value={comment}
           multiline
           rows={2}
+          onChange={handleComment}
           sx={{
             ml: 2,
-            mr: 2
+            mr: 2,
           }}
         />
       </FormControl>
-      <Button variant="contained" size="large" sx={{
-        mb: 4,
-        mr: 1
-      }}>Post</Button>
+      <Button
+        onClick={handleSubmit}
+        variant="contained"
+        size="large"
+        sx={{
+          mb: 4,
+          mr: 1,
+        }}
+      >
+        Post
+      </Button>
     </Container>
+    // </form>
   );
 };
 

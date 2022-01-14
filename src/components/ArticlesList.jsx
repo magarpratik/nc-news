@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import {
+  Avatar,
   Box,
   Card,
   CardActionArea,
@@ -114,12 +115,24 @@ const ArticlesList = ({ topic }) => {
                         sx={{
                           display: "flex",
                           justifyContent: "space-between",
+                          alignItems: "center"
                         }}
                       >
                         <Typography color="textSecondary">
                           {new dayjs(article.created_at).format("D MMM YYYY")}
                         </Typography>
-                        <Typography color="textSecondary">{`- ${article.author}`}</Typography>
+
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <Avatar
+                            alt={article.author}
+                            src={`https://api.multiavatar.com/${article.author}.svg`}
+                            sx={{ width: 35, height: 35, mr: 1 }}
+
+                          />
+                          <Typography color="textSecondary">
+                            {article.author}
+                          </Typography>
+                        </Box>
                       </Box>
                     </CardContent>
                   </CardActionArea>
