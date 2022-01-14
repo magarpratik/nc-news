@@ -54,3 +54,7 @@ export const addComment = (article_id, username, body) => {
     body: body,
   });
 };
+
+export const deleteComment = (comment_id) => {
+  return newsApi.delete(`/comments/${comment_id}`);
+};

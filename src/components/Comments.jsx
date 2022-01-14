@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getComments } from "../utils/api";
 import {
   Avatar,
@@ -10,9 +10,13 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { UserContext } from "../contexts/User";
+import DeleteButton from "./DeleteButton";
 
-const Comments = ({ article_id, renderKey }) => {
+const Comments = ({ article_id, renderKey, setRenderKey }) => {
   const [comments, setComments] = useState([]);
+
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     getComments(article_id).then((comments) => {
@@ -36,11 +40,17 @@ const Comments = ({ article_id, renderKey }) => {
                     src={`https://api.multiavatar.com/${comment.author}.svg`}
                   />
                 </ListItemAvatar>
-
                 <ListItemText
                   primary={comment.author}
                   secondary={comment.body}
-                ></ListItemText>
+                />
+                {user === comment.author ? (
+                  <DeleteButton
+                    comment_id={comment.comment_id}
+                    renderKey={renderKey}
+                    setRenderKey={setRenderKey}
+                  />
+                ) : null}
               </ListItem>
               <Divider />
             </React.Fragment>

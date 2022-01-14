@@ -14,7 +14,7 @@ const ArticlePage = () => {
   return (
     <>
       <Article article_id={article_id} />
-      <Comments article_id={article_id} renderKey={renderKey}/>
+      <Comments article_id={article_id} renderKey={renderKey} setRenderKey={setRenderKey}/>
       <NewComment article_id={article_id} renderKey={renderKey} setRenderKey={setRenderKey}/>
     </>
   );
