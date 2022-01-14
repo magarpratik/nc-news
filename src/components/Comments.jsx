@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getComments } from "../utils/api";
 import {
   Avatar,
@@ -28,7 +28,7 @@ const Comments = ({ article_id }) => {
       <List>
         {comments.map((comment) => {
           return (
-            <>
+            <React.Fragment key={comment.comment_id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar
@@ -37,10 +37,13 @@ const Comments = ({ article_id }) => {
                   />
                 </ListItemAvatar>
 
-                <ListItemText primary={comment.author} secondary={comment.body}></ListItemText>
+                <ListItemText
+                  primary={comment.author}
+                  secondary={comment.body}
+                ></ListItemText>
               </ListItem>
               <Divider />
-            </>
+            </React.Fragment>
           );
         })}
       </List>
