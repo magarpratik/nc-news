@@ -31,7 +31,6 @@ const NewComment = ({ article_id, renderKey, setRenderKey }) => {
   };
 
   return (
-    // <form onSubmit={handleSubmit}>
     <Container
       maxWidth="md"
       sx={{
@@ -76,7 +75,6 @@ const NewComment = ({ article_id, renderKey, setRenderKey }) => {
         Post
       </Button>
     </Container>
-    // </form>
   );
 };
 
