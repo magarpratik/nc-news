@@ -4,7 +4,7 @@ The project can be accessed [here](https://northnews.netlify.com).
 
 ## Summary
 
-North News is a web app that mimics a news website where users can browse articles, post comments and vote on articles. It is created using [React](https://reactjs.org) and [MUI](https://mui.com).\
+North News is a web app that mimics a news website where users can browse articles, post comments and vote on articles. It is created using [React](https://reactjs.org) and [MUI](https://mui.com).
 
 The project uses the [North News API](https://github.com/magarpratik/news-api) to fetch data. It is hosted on heroku and can be accessed [here](https://northnews.herokuapp.com/api).
 
