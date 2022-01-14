@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import {
   Avatar,
@@ -21,6 +21,7 @@ import { getArticles } from "../utils/api";
 import { Link } from "react-router-dom";
 import Vote from "./Vote";
 import dayjs from "dayjs";
+import { UserContext } from "../contexts/User";
 
 const PAGE_LIMIT = 9;
 
@@ -30,6 +31,7 @@ const ArticlesList = ({ topic }) => {
   const [totalCount, setTotalCount] = useState(0);
   const [sort_by, setSort_by] = useState("created_at");
   const [order, setOrder] = useState("desc");
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     getArticles({ topic, page, sort_by, order }).then(
@@ -59,7 +61,28 @@ const ArticlesList = ({ topic }) => {
         padding: "20px 0",
       }}
     >
+      
+
       <Box sx={{ mb: 2, display: "flex", flexDirection: "row-reverse" }}>
+
+        <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <Avatar alt={user} src={`https://api.multiavatar.com/${user}.svg`} />
+        <Typography
+          color="textSecondary"
+          sx={{
+            ml: 1,
+            mr: 1.5,
+          }}
+        >
+          {user}
+        </Typography>
+      </Box>
         <FormControl sx={{ mr: 2, ml: 2 }}>
           <InputLabel>Sort by</InputLabel>
           <Select label="sort by" value={sort_by} onChange={handleSort}>
@@ -77,6 +100,7 @@ const ArticlesList = ({ topic }) => {
             <MenuItem value={"asc"}>Ascending</MenuItem>
           </Select>
         </FormControl>
+
       </Box>
 
       <Stack
@@ -115,7 +139,7 @@ const ArticlesList = ({ topic }) => {
                         sx={{
                           display: "flex",
                           justifyContent: "space-between",
-                          alignItems: "center"
+                          alignItems: "center",
                         }}
                       >
                         <Typography color="textSecondary">
@@ -127,7 +151,6 @@ const ArticlesList = ({ topic }) => {
                             alt={article.author}
                             src={`https://api.multiavatar.com/${article.author}.svg`}
                             sx={{ width: 35, height: 35, mr: 1 }}
-
                           />
                           <Typography color="textSecondary">
                             {article.author}

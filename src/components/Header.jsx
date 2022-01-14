@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <AppBar position="relative">
       <Typography variant="h3" align="center">
-        <NewspaperIcon fontSize="large" sx={{ mr: 1.5 }} />
+        <NewspaperIcon fontSize="large" sx={{ mr: 1 }} />
         North News
       </Typography>
     </AppBar>

@@ -1,4 +1,12 @@
-import { Button, Container, FormControl, TextField } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  FormControl,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { addComment } from "../utils/api";
@@ -31,6 +39,19 @@ const NewComment = ({ article_id, renderKey, setRenderKey }) => {
         mb: 4,
       }}
     >
+      <Box>
+        <Avatar alt={user} src={`https://api.multiavatar.com/${user}.svg`} />
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{
+            mt: 0.5,
+          }}
+        >
+          {user}
+        </Typography>
+      </Box>
+
       <FormControl fullWidth>
         <TextField
           value={comment}

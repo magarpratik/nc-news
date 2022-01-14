@@ -17,6 +17,7 @@ const App = () => {
       <Header />
       <Router>
         <NavBar />
+
         <Routes>
           <Route path="/*" element={<PageNotFound />} />
           <Route path="/" element={<ArticlesList topic="" />} />
