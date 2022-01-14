@@ -54,7 +54,7 @@ const ArticlesList = ({ topic }) => {
 
   return (
     <Container
-      maxWidth="md"
+      maxWidth="lg"
       sx={{
         padding: "20px 0",
       }}
