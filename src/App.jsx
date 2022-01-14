@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import ArticlesList from "./components/ArticlesList";
 import ArticlePage from "./components/ArticlePage";
 import { UserContext } from "./contexts/User";
+import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
   const [user, setUser] = useState("jessjelly");
@@ -17,6 +18,7 @@ const App = () => {
         <Header />
         <NavBar />
         <Routes>
+          <Route path="/*" element={<PageNotFound />} />
           <Route path="/" element={<ArticlesList topic="" />} />
           <Route path="/coding" element={<ArticlesList topic="coding" />} />
           <Route path="/football" element={<ArticlesList topic="football" />} />

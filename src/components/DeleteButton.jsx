@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteComment } from "../utils/api";
 
@@ -10,7 +10,9 @@ const DeleteButton = ({ comment_id, renderKey, setRenderKey }) => {
   };
 
   return (
-    <Button startIcon={<DeleteIcon />} color="error" onClick={handleClick} />
+    <IconButton color="error" onClick={handleClick}>
+      <DeleteIcon />
+    </IconButton>
   );
 };
 
