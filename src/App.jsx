@@ -13,9 +13,9 @@ const App = () => {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
+      <CssBaseline />
+      <Header />
       <Router>
-        <CssBaseline />
-        <Header />
         <NavBar />
         <Routes>
           <Route path="/*" element={<PageNotFound />} />
