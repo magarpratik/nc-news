@@ -26,4 +26,4 @@ You may also see any lint errors in the console.
 
 ## Minimum requirements
 
-Node v16.11.1
+Node `v16.11.1`
