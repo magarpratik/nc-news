@@ -1,6 +1,6 @@
 # North News 
 
-The project can be accessed [here](https://northnews.netlify.com).
+The project can be accessed [here](https://northnews.netlify.app).
 
 ## Summary
 
