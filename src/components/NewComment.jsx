@@ -10,6 +10,7 @@ import {
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { addComment } from "../utils/api";
+import { avatarSrc } from "../utils/avatar";
 
 const NewComment = ({ article_id, renderKey, setRenderKey }) => {
   const { user } = useContext(UserContext);
@@ -39,7 +40,7 @@ const NewComment = ({ article_id, renderKey, setRenderKey }) => {
       }}
     >
       <Box>
-        <Avatar alt={user} src={`https://api.multiavatar.com/${user}.svg`} />
+        <Avatar alt={user} src={avatarSrc(user)} />
         <Typography
           variant="body2"
           color="textSecondary"

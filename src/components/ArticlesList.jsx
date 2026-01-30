@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import Vote from "./Vote";
 import dayjs from "dayjs";
 import { UserContext } from "../contexts/User";
+import { avatarSrc } from "../utils/avatar";
 
 const PAGE_LIMIT = 9;
 
@@ -38,7 +39,7 @@ const ArticlesList = ({ topic }) => {
       ({ articles, total_count }) => {
         setArticlesList(articles);
         setTotalCount(total_count);
-      }
+      },
     );
   }, [topic, page, sort_by, order]);
 
@@ -61,28 +62,25 @@ const ArticlesList = ({ topic }) => {
         padding: "20px 0",
       }}
     >
-      
-
       <Box sx={{ mb: 2, display: "flex", flexDirection: "row-reverse" }}>
-
         <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-        }}
-      >
-        <Avatar alt={user} src={`https://api.multiavatar.com/${user}.svg`} />
-        <Typography
-          color="textSecondary"
           sx={{
-            ml: 1,
-            mr: 1.5,
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
           }}
         >
-          {user}
-        </Typography>
-      </Box>
+          <Avatar alt={user} src={avatarSrc(user)} />
+          <Typography
+            color="textSecondary"
+            sx={{
+              ml: 1,
+              mr: 1.5,
+            }}
+          >
+            {user}
+          </Typography>
+        </Box>
         <FormControl sx={{ mr: 2, ml: 2 }}>
           <InputLabel>Sort by</InputLabel>
           <Select label="sort by" value={sort_by} onChange={handleSort}>
@@ -100,7 +98,6 @@ const ArticlesList = ({ topic }) => {
             <MenuItem value={"asc"}>Ascending</MenuItem>
           </Select>
         </FormControl>
-
       </Box>
 
       <Stack
@@ -149,7 +146,7 @@ const ArticlesList = ({ topic }) => {
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                           <Avatar
                             alt={article.author}
-                            src={`https://api.multiavatar.com/${article.author}.svg`}
+                            src={avatarSrc(article.author)}
                             sx={{ width: 35, height: 35, mr: 1 }}
                           />
                           <Typography color="textSecondary">

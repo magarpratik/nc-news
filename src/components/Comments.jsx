@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { UserContext } from "../contexts/User";
 import DeleteButton from "./DeleteButton";
+import { avatarSrc } from "../utils/avatar";
 
 const Comments = ({ article_id, renderKey, setRenderKey }) => {
   const [comments, setComments] = useState([]);
@@ -37,7 +38,7 @@ const Comments = ({ article_id, renderKey, setRenderKey }) => {
                 <ListItemAvatar>
                   <Avatar
                     alt={comment.author}
-                    src={`https://api.multiavatar.com/${comment.author}.svg`}
+                    src={avatarSrc(comment.author)}
                   />
                 </ListItemAvatar>
                 <ListItemText
