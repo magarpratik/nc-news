@@ -122,7 +122,7 @@ const ArticlesList = ({ topic }) => {
                     }}
                   >
                     <CardMedia
-                      image={`https://loremflickr.com/800/600/${article.title.split(' ').slice(0, 3).join('-')}`}
+                      image={"https://picsum.photos/800/600"}
                       title={article.title}
                       sx={{
                         paddingTop: "56.25%",
