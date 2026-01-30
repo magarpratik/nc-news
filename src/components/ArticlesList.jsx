@@ -122,7 +122,7 @@ const ArticlesList = ({ topic }) => {
                     }}
                   >
                     <CardMedia
-                      image={`https://picsum.photos/${article.article_id}/800/600`}
+                      image={`https://picsum.photos/800/600?random=${crypto.randomUUID()}`}
                       title={article.title}
                       sx={{
                         paddingTop: "56.25%",
