@@ -18,7 +18,7 @@ git clone https://github.com/magarpratik/nc-news.git
 
 ## Running the app
 
-Navigate to the project folder by executing `cd nc-news` and `npm start` to run the app in development mode.\
+Navigate to the root folder and run `npm start` to run the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
